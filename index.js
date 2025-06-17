@@ -10,10 +10,6 @@ app.post('/webhook', (req, res) => {
   res.json(req.body);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
-
 // Request/Response logging middleware
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
@@ -25,4 +21,8 @@ app.use((req, res, next) => {
     return originalSend.call(this, body);
   };
   next();
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
