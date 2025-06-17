@@ -6,6 +6,10 @@ app.get('/', (req, res) => {
   res.send('Hello from Render-hosted Express!');
 });
 
+app.post('/webhook', (req, res) => {
+  res.json(req.body);
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
