@@ -13,3 +13,16 @@ app.post('/webhook', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+
+// Request/Response logging middleware
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log('Request Headers:', req.headers); console.log('Request Body:', req.body);
+  // Capture response details  const originalSend = res.send;
+  res.send = function (body) {
+    console.log('Response Status:', res.statusCode);
+    console.log('Response Body:', body);
+    return originalSend.call(this, body);
+  };
+  next();
+});
